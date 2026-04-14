@@ -48,17 +48,13 @@
 </style>
   <style>body { box-sizing: border-box; }</style>
  </head>
- <body class="h-full">
-  <!-- AUTH SCREEN -->
-  <div id="auth-container" class="h-full flex">
-   <!-- LOGIN SCREEN -->
+ <body class="h-full"><!-- AUTH SCREEN -->
+  <div id="auth-container" class="h-full flex"><!-- LOGIN SCREEN -->
    <div id="login-screen" class="w-full h-full flex items-center justify-center p-4" style="background:linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%);">
     <div class="w-full max-w-400px">
-     <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter">
-      <!-- Logo -->
+     <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter"><!-- Logo -->
       <div class="flex items-center justify-center mb-8">
-       <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:#1e6b3a;">
-        <span class="text-white text-2xl">🏛️</span>
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:#1e6b3a;"><span class="text-white text-2xl">🏛️</span>
        </div>
        <div class="ml-3">
         <div class="text-lg font-bold" style="color:#0c1929;">
@@ -72,14 +68,11 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Welcome Back</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Sign in to your government account</p>
       <form id="login-form" onsubmit="handleLogin(event)">
-       <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Email Address</label> <input id="login-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="login-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-2">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="login-password" type="password" required placeholder="Enter your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-2"><label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="login-password" type="password" required placeholder="Enter your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="text-right mb-6">
-        <button type="button" onclick="switchAuthScreen('forgot')" class="text-xs text-blue-600 hover:text-blue-700 font-medium">Forgot password?</button>
+       <div class="text-right mb-6"><button type="button" onclick="switchAuthScreen('forgot')" class="text-xs text-blue-600 hover:text-blue-700 font-medium">Forgot password?</button>
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"> Sign In </button>
       </form>
       <div class="text-center mt-6 text-xs text-slate-600">
@@ -97,20 +90,15 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Create Account</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Join the Civic AI Platform</p>
       <form id="signup-form" onsubmit="handleSignup(event)">
-       <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Full Name</label> <input id="signup-name" type="text" required placeholder="Your full name" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Full Name</label> <input id="signup-name" type="text" required placeholder="Your full name" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Email Address</label> <input id="signup-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="signup-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number (Optional)</label> <input id="signup-phone" type="tel" placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Email (Optional)</label> <input id="signup-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="signup-password" type="password" required placeholder="Create a strong password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="signup-password" type="password" required placeholder="Create a strong password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-6">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Confirm Password</label> <input id="signup-confirm" type="password" required placeholder="Confirm your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-6"><label class="block text-xs font-semibold text-slate-600 mb-2">Confirm Password</label> <input id="signup-confirm" type="password" required placeholder="Confirm your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"> Create Account </button>
       </form>
       <div class="text-center mt-6 text-xs text-slate-600">
@@ -122,26 +110,23 @@
    <div id="otp-screen" class="w-full h-full hidden flex items-center justify-center p-4" style="background:linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%);">
     <div class="w-full max-w-400px">
      <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter">
-      <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Verify Email</h2>
-      <p class="text-xs text-center text-slate-400 mb-6">Enter the 6-digit code sent to your email</p>
-      <div id="otp-email-display" class="bg-slate-50 rounded-lg px-4 py-3 text-center mb-6">
+      <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Verify Phone</h2>
+      <p class="text-xs text-center text-slate-400 mb-6">Enter the 6-digit code sent to your phone</p>
+      <div id="otp-phone-display" class="bg-slate-50 rounded-lg px-4 py-3 text-center mb-6">
        <div class="text-xs text-slate-500 mb-1">
         Code sent to
        </div>
-       <div id="otp-email" class="font-mono-accent font-semibold text-slate-700"></div>
+       <div id="otp-phone" class="font-mono-accent font-semibold text-slate-700"></div>
       </div>
-      <form id="otp-form" onsubmit="handleOTPSubmit(event)">
-       <label class="block text-xs font-semibold text-slate-600 mb-3">Enter Code</label>
+      <form id="otp-form" onsubmit="handleOTPSubmit(event)"><label class="block text-xs font-semibold text-slate-600 mb-3">Enter Code</label>
        <div class="flex gap-2 mb-4" id="otp-inputs"></div>
        <div id="otp-timer" class="text-center text-xs text-slate-500 mb-4">
         Expires in <span id="timer-count">300</span>s
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;"> Verify </button>
       </form>
-      <div class="text-center mt-4">
-       <button type="button" onclick="resendOTP()" class="text-xs text-blue-600 hover:text-blue-700 font-medium"> Didn't receive code? Resend </button>
+      <div class="text-center mt-4"><button type="button" onclick="resendOTP()" class="text-xs text-blue-600 hover:text-blue-700 font-medium"> Didn't receive code? Resend </button>
       </div>
-      <div class="text-center mt-6 text-xs text-slate-600">
-       <button type="button" onclick="switchAuthScreen('login')" class="text-slate-500 hover:text-slate-700">← Back to Login</button>
+      <div class="text-center mt-6 text-xs text-slate-600"><button type="button" onclick="switchAuthScreen('login')" class="text-slate-500 hover:text-slate-700">← Back to Login</button>
       </div>
      </div>
     </div>
@@ -152,24 +137,20 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Reset Password</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Enter your phone to receive a reset code</p>
       <form id="forgot-form" onsubmit="handleForgotPassword(event)">
-       <div class="mb-6">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Email Address</label> <input id="forgot-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-6"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="forgot-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;"> Send Reset Code </button>
       </form>
-      <div class="text-center mt-6 text-xs text-slate-600">
-       <button type="button" onclick="switchAuthScreen('login')" class="text-blue-600 hover:text-blue-700 font-semibold">← Back to Login</button>
+      <div class="text-center mt-6 text-xs text-slate-600"><button type="button" onclick="switchAuthScreen('login')" class="text-blue-600 hover:text-blue-700 font-semibold">← Back to Login</button>
       </div>
      </div>
     </div>
    </div>
   </div>
-  <div id="app" class="h-full flex hidden" style="background:#f0f2f5;">
-   <!-- Sidebar -->
+  <div id="app" class="h-full flex hidden" style="background:#f0f2f5;"><!-- Sidebar -->
    <nav id="sidebar" class="w-64 flex-shrink-0 flex flex-col" style="background:#0c1929;">
     <div class="p-5 border-b border-white/10">
      <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#1e6b3a;">
-       <span class="text-white text-lg">🏛️</span>
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#1e6b3a;"><span class="text-white text-lg">🏛️</span>
       </div>
       <div>
        <div id="sidebar-title" class="text-white font-bold text-sm leading-tight">
@@ -181,8 +162,7 @@
       </div>
      </div>
     </div>
-    <div class="flex-1 p-3 flex flex-col gap-1">
-     <button onclick="switchView('dashboard')" id="nav-dashboard" class="sidebar-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/90 text-sm text-left"> <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Dashboard </button> <button onclick="switchView('map')" id="nav-map" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="map-pin" style="width:18px;height:18px;"></i> Map View </button> <button onclick="switchView('complaints')" id="nav-complaints" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="inbox" style="width:18px;height:18px;"></i> Complaints </button> <button onclick="switchView('submit')" id="nav-submit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="plus-circle" style="width:18px;height:18px;"></i> New Complaint </button> <button onclick="switchView('legal')" id="nav-legal" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="scale" style="width:18px;height:18px;"></i> Legal Database </button> <button onclick="switchView('audit')" id="nav-audit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="shield-check" style="width:18px;height:18px;"></i> Audit Log </button> <button onclick="switchView('telegram')" id="nav-telegram" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="send" style="width:18px;height:18px;"></i> Telegram Bot </button> <button onclick="switchView('roles')" id="nav-roles" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="users" style="width:18px;height:18px;"></i> Roles </button>
+    <div class="flex-1 p-3 flex flex-col gap-1"><button onclick="switchView('dashboard')" id="nav-dashboard" class="sidebar-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/90 text-sm text-left"> <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Dashboard </button> <button onclick="switchView('map')" id="nav-map" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="map-pin" style="width:18px;height:18px;"></i> Map View </button> <button onclick="switchView('complaints')" id="nav-complaints" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="inbox" style="width:18px;height:18px;"></i> Complaints </button> <button onclick="switchView('submit')" id="nav-submit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="plus-circle" style="width:18px;height:18px;"></i> New Complaint </button> <button onclick="switchView('legal')" id="nav-legal" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="scale" style="width:18px;height:18px;"></i> Legal Database </button> <button onclick="switchView('audit')" id="nav-audit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="shield-check" style="width:18px;height:18px;"></i> Audit Log </button> <button onclick="switchView('telegram')" id="nav-telegram" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="send" style="width:18px;height:18px;"></i> Telegram Bot </button> <button onclick="switchView('roles')" id="nav-roles" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="users" style="width:18px;height:18px;"></i> Roles </button>
     </div>
     <div class="p-4 border-t border-white/10">
      <div class="flex items-center gap-3">
@@ -200,21 +180,17 @@
      </div><button onclick="logout()" class="w-full mt-3 px-3 py-2 rounded-lg text-white text-xs font-semibold transition-all hover:bg-red-600/20" style="background:rgba(239,68,68,0.1);color:#ef4444;"> 🔒 Logout </button>
     </div>
    </nav><!-- Main Content -->
-   <main class="flex-1 flex flex-col h-full overflow-hidden">
-    <!-- Header -->
+   <main class="flex-1 flex flex-col h-full overflow-hidden"><!-- Header -->
     <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-slate-200">
      <div>
       <h1 id="page-title" class="text-lg font-bold" style="color:#0c1929;">Dashboard Overview</h1>
       <p class="text-xs text-slate-400 font-mono-accent" id="current-time"></p>
      </div>
-     <div class="flex items-center gap-3">
-      <span class="badge" style="background:#dcfce7;color:#166534;">System Operational</span> <span class="badge" style="background:#e0e7ff;color:#3730a3;">AI Active</span>
+     <div class="flex items-center gap-3"><span class="badge" style="background:#dcfce7;color:#166534;">System Operational</span> <span class="badge" style="background:#e0e7ff;color:#3730a3;">AI Active</span>
      </div>
     </header>
-    <div class="flex-1 scroll-area p-6">
-     <!-- DASHBOARD VIEW -->
-     <div id="view-dashboard">
-      <!-- Stats Row -->
+    <div class="flex-1 scroll-area p-6"><!-- DASHBOARD VIEW -->
+     <div id="view-dashboard"><!-- Stats Row -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
        <div class="stat-card card-enter bg-white rounded-xl p-5 border border-slate-100">
         <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">
@@ -277,8 +253,7 @@
      <div id="view-map" class="hidden">
       <div class="bg-white rounded-xl border border-slate-100 p-4 card-enter mb-4">
        <h3 class="font-bold text-sm mb-3" style="color:#0c1929;">Real-Time Complaint Heatmap (Addis Ababa)</h3>
-       <div class="flex gap-2 mb-3">
-        <button onclick="switchMapMode('markers')" id="map-mode-markers" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold bg-blue-50 text-blue-700">📍 Markers</button> <button onclick="switchMapMode('heatmap')" id="map-mode-heatmap" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">🔥 Heatmap</button> <button onclick="switchMapMode('clusters')" id="map-mode-clusters" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">📊 Clusters</button>
+       <div class="flex gap-2 mb-3"><button onclick="switchMapMode('markers')" id="map-mode-markers" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold bg-blue-50 text-blue-700">📍 Markers</button> <button onclick="switchMapMode('heatmap')" id="map-mode-heatmap" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">🔥 Heatmap</button> <button onclick="switchMapMode('clusters')" id="map-mode-clusters" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">📊 Clusters</button>
        </div>
        <div id="map"></div>
       </div>
@@ -291,8 +266,7 @@
       </div>
      </div>
      <div id="view-complaints" class="hidden">
-      <div class="flex flex-wrap items-center gap-3 mb-4">
-       <select id="filter-status" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Status</option> <option value="Submitted">Submitted</option> <option value="Under Review">Under Review</option> <option value="Resolved">Resolved</option> </select> <select id="filter-urgency" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Urgency</option> <option value="HIGH">High</option> <option value="MEDIUM">Medium</option> <option value="LOW">Low</option> </select> <select id="filter-category" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Categories</option> <option value="Waste Management">Waste Management</option> <option value="Water Services">Water Services</option> <option value="Roads &amp; Infrastructure">Roads &amp; Infrastructure</option> <option value="Public Health">Public Health</option> <option value="Land &amp; Housing">Land &amp; Housing</option> <option value="Governance">Governance</option> </select> <select id="filter-language" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Languages</option> <option value="en">English</option> <option value="am">Amharic</option> <option value="om">Oromo</option> </select> <button onclick="toggleDuplicateFilter()" id="dup-btn" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white hover:bg-slate-50">🚫 Show Duplicates</button>
+      <div class="flex flex-wrap items-center gap-3 mb-4"><select id="filter-status" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Status</option> <option value="Submitted">Submitted</option> <option value="Under Review">Under Review</option> <option value="Resolved">Resolved</option> </select> <select id="filter-urgency" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Urgency</option> <option value="HIGH">High</option> <option value="MEDIUM">Medium</option> <option value="LOW">Low</option> </select> <select id="filter-category" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Categories</option> <option value="Waste Management">Waste Management</option> <option value="Water Services">Water Services</option> <option value="Roads &amp; Infrastructure">Roads &amp; Infrastructure</option> <option value="Public Health">Public Health</option> <option value="Land &amp; Housing">Land &amp; Housing</option> <option value="Governance">Governance</option> </select> <select id="filter-language" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Languages</option> <option value="en">English</option> <option value="am">Amharic</option> <option value="om">Oromo</option> </select> <button onclick="toggleDuplicateFilter()" id="dup-btn" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white hover:bg-slate-50">🚫 Show Duplicates</button>
       </div>
       <div id="complaints-list"></div>
       <div id="complaints-empty" class="text-center text-slate-400 text-sm py-12">
@@ -306,31 +280,23 @@
         <p class="text-xs text-slate-400 mb-5">AI will automatically classify and match relevant laws.</p>
         <form id="complaint-form" onsubmit="handleSubmit(event)">
          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div>
-           <label for="f-name" class="block text-xs font-semibold text-slate-500 mb-1">Citizen Name</label> <input id="f-name" type="text" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Full name">
+          <div><label for="f-name" class="block text-xs font-semibold text-slate-500 mb-1">Citizen Name</label> <input id="f-name" type="text" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Full name">
           </div>
-          <div>
-           <label for="f-phone" class="block text-xs font-semibold text-slate-500 mb-1">Phone (SMS Fallback)</label> <input id="f-phone" type="tel" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+251 9xx xxx xxxx">
+          <div><label for="f-phone" class="block text-xs font-semibold text-slate-500 mb-1">Phone (SMS Fallback)</label> <input id="f-phone" type="tel" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+251 9xx xxx xxxx">
           </div>
          </div>
          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div>
-           <label for="f-region" class="block text-xs font-semibold text-slate-500 mb-1">Region / Woreda</label> <select id="f-region" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select region</option> <option>Addis Ababa / Bole</option> <option>Addis Ababa / Yeka</option> <option>Oromia / Sheger</option> <option>Oromia / Adama</option> <option>Amhara / Bahir Dar</option> <option>SNNPR / Hawassa</option> <option>Tigray / Mekelle</option> <option>Other</option> </select>
+          <div><label for="f-region" class="block text-xs font-semibold text-slate-500 mb-1">Region / Woreda</label> <select id="f-region" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select region</option> <option>Addis Ababa / Bole</option> <option>Addis Ababa / Yeka</option> <option>Oromia / Sheger</option> <option>Oromia / Adama</option> <option>Amhara / Bahir Dar</option> <option>SNNPR / Hawassa</option> <option>Tigray / Mekelle</option> <option>Other</option> </select>
           </div>
-          <div>
-           <label for="f-category" class="block text-xs font-semibold text-slate-500 mb-1">Category</label> <select id="f-category" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select category</option> <option>Waste Management</option> <option>Water Services</option> <option>Roads &amp; Infrastructure</option> <option>Public Health</option> <option>Land &amp; Housing</option> <option>Governance</option> </select>
+          <div><label for="f-category" class="block text-xs font-semibold text-slate-500 mb-1">Category</label> <select id="f-category" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select category</option> <option>Waste Management</option> <option>Water Services</option> <option>Roads &amp; Infrastructure</option> <option>Public Health</option> <option>Land &amp; Housing</option> <option>Governance</option> </select>
           </div>
          </div>
          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div>
-           <label for="f-email" class="block text-xs font-semibold text-slate-500 mb-1">Email (for updates)</label> <input id="f-email" type="email" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@email.com">
+          <div><label for="f-email" class="block text-xs font-semibold text-slate-500 mb-1">Email (for updates)</label> <input id="f-email" type="email" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@email.com">
           </div>
-          <div>
-           <label class="block text-xs font-semibold text-slate-500 mb-1">GPS Location (Optional)</label> <button type="button" onclick="captureGPS()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-blue-50 text-blue-700 font-medium hover:bg-blue-100 transition-all w-full"> <i data-lucide="navigation-2" style="width:14px;height:14px;display:inline;margin-right:4px;"></i> Get Current Location </button>
-           <div class="mb-4">
-            <label for="f-desc" class="block text-xs font-semibold text-slate-500 mb-2">Description</label>
-            <div class="flex gap-2 mb-4">
-             <textarea id="f-desc" required rows="4" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Describe the issue in detail..."></textarea> <button type="button" id="voice-btn" onclick="startVoiceInput()" class="px-3 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all" title="Record complaint with voice"> <i data-lucide="mic" style="width:20px;height:20px;"></i> </button>
+          <div><label class="block text-xs font-semibold text-slate-500 mb-1">GPS Location (Optional)</label> <button type="button" onclick="captureGPS()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-blue-50 text-blue-700 font-medium hover:bg-blue-100 transition-all w-full"> <i data-lucide="navigation-2" style="width:14px;height:14px;display:inline;margin-right:4px;"></i> Get Current Location </button>
+           <div class="mb-4"><label for="f-desc" class="block text-xs font-semibold text-slate-500 mb-2">Description</label>
+            <div class="flex gap-2 mb-4"><textarea id="f-desc" required rows="4" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Describe the issue in detail..."></textarea> <button type="button" id="voice-btn" onclick="startVoiceInput()" class="px-3 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all" title="Record complaint with voice"> <i data-lucide="mic" style="width:20px;height:20px;"></i> </button>
             </div>
            </div><button id="submit-btn" type="submit" class="px-6 py-2.5 rounded-lg text-white text-sm font-semibold transition-all hover:opacity-90" style="background:#1e6b3a;"> <span id="submit-text">Submit &amp; Analyze</span> <span id="submit-loading" class="hidden">Analyzing...</span> </button>
           </div>
@@ -343,8 +309,7 @@
        </div><!-- AUDIT VIEW -->
        <div id="view-audit" class="hidden">
         <div class="bg-white rounded-xl border border-slate-100 overflow-hidden">
-         <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2">
-          <i data-lucide="shield-check" style="width:16px;height:16px;color:#6366f1;"></i> <span class="text-sm font-bold" style="color:#0c1929;">Immutable Audit Trail</span> <span class="badge ml-auto" style="background:#fef3c7;color:#92400e;">Tamper-Proof</span>
+         <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2"><i data-lucide="shield-check" style="width:16px;height:16px;color:#6366f1;"></i> <span class="text-sm font-bold" style="color:#0c1929;">Immutable Audit Trail</span> <span class="badge ml-auto" style="background:#fef3c7;color:#92400e;">Tamper-Proof</span>
          </div>
          <div id="audit-list" class="divide-y divide-slate-50"></div>
          <div id="audit-empty" class="text-center text-slate-400 text-sm py-12">
@@ -368,7 +333,7 @@
      <script>
 // ===== SUPABASE INTEGRATION =====
 const SUPABASE_URL = 'https://xilystkfdruuxkxqjenq.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_25cTmqyhwmPx9Ak_IeNWJg_ZMQtFBox';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhpbHlzdGtmZHJ1dXhreFFqZW5xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIxOTEyNDIsImV4cCI6MjA0Nzc2NzI0Mn0.5LlFaQ5nz8w6r7xqK9pL2mZ3aB4cD5eF6gH7iJ8kL9m';
 
 let supabase = null;
 
@@ -972,6 +937,9 @@ let liveNotifications = [];
 let isAuthenticated = false;
 let currentUser = null;
 let authScreen = 'login'; // 'login', 'signup', 'forgot', 'otp', 'main'
+let registeredUsers = {};
+let otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+let otpExpiry = Date.now() + 5 * 60 * 1000; // 5 min
 let pendingPhoneVerification = null;
 
 // ===== AUTHENTICATION FUNCTIONS =====
@@ -986,198 +954,6 @@ function switchAuthScreen(screen) {
     renderOTPInputs();
     startOTPTimer();
   }
-}
-
-// ===== SIGN UP WITH EMAIL (SUPABASE) =====
-async function handleSignup(e) {
-  e.preventDefault();
-  
-  const name = document.getElementById('signup-name').value.trim();
-  const email = document.getElementById('signup-email').value.trim();
-  const phone = document.getElementById('signup-phone').value.trim();
-  const password = document.getElementById('signup-password').value.trim();
-  const confirm = document.getElementById('signup-confirm').value.trim();
-  
-  // Validation
-  if (!name || !email || !password || !confirm) {
-    showAuthToast('❌ Please fill all required fields', 'error');
-    return;
-  }
-  
-  if (!email.includes('@')) {
-    showAuthToast('❌ Invalid email address', 'error');
-    return;
-  }
-  
-  if (password !== confirm) {
-    showAuthToast('❌ Passwords do not match', 'error');
-    return;
-  }
-  
-  if (password.length < 6) {
-    showAuthToast('❌ Password must be at least 6 characters', 'error');
-    return;
-  }
-  
-  // SUPABASE: Sign up with email (sends OTP to email)
-  if (!supabase) {
-    showAuthToast('❌ Database connection failed', 'error');
-    return;
-  }
-  
-  const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
-    options: {
-      data: {
-        full_name: name,
-        phone: phone || null
-      },
-      emailRedirectTo: window.location.origin
-    }
-  });
-  
-  if (error) {
-    console.error('Signup error:', error);
-    showAuthToast(`❌ ${error.message}`, 'error');
-    addAudit('SIGNUP_ERROR', `Signup failed for ${email}: ${error.message}`);
-    return;
-  }
-  
-  if (data?.user) {
-    // User created, now send OTP via email for verification
-    pendingPhoneVerification = email;
-    currentUser = { email, name, phone: phone || null };
-    
-    // Display OTP screen
-    document.getElementById('otp-email').textContent = email;
-    showAuthToast(`✅ Signup successful! Check ${email} for verification code.`, 'success');
-    addAudit('SIGNUP_SUCCESS', `New user registered: ${email}`);
-    switchAuthScreen('otp');
-  }
-}
-
-// ===== LOGIN WITH EMAIL + OTP (SUPABASE) =====
-async function handleLogin(e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value.trim();
-  
-  if (!email || !password) {
-    showAuthToast('❌ Please enter email and password', 'error');
-    return;
-  }
-  
-  if (!supabase) {
-    showAuthToast('❌ Database connection failed', 'error');
-    return;
-  }
-  
-  // SUPABASE: Sign in with password
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-  
-  if (error) {
-    console.error('Login error:', error);
-    showAuthToast(`❌ ${error.message}`, 'error');
-    addAudit('LOGIN_ERROR', `Login failed for ${email}: ${error.message}`);
-    return;
-  }
-  
-  if (data?.user) {
-    // User authenticated successfully
-    pendingPhoneVerification = email;
-    currentUser = { 
-      email: data.user.email,
-      name: data.user.user_metadata?.full_name || 'User',
-      phone: data.user.user_metadata?.phone || null
-    };
-    
-    // Show OTP verification screen for second factor
-    document.getElementById('otp-email').textContent = email;
-    showAuthToast(`✅ Password verified! Check ${email} for 2FA code.`, 'success');
-    addAudit('LOGIN_SUCCESS', `User logged in: ${email}`);
-    switchAuthScreen('otp');
-  }
-}
-
-// ===== VERIFY OTP (SUPABASE) =====
-async function handleOTPSubmit(e) {
-  e.preventDefault();
-  
-  const enteredOTP = getOTPValue();
-  
-  if (enteredOTP.length !== 6 || isNaN(enteredOTP)) {
-    showAuthToast('❌ Please enter a valid 6-digit code', 'error');
-    return;
-  }
-  
-  if (!supabase) {
-    showAuthToast('❌ Database connection failed', 'error');
-    return;
-  }
-  
-  // SUPABASE: Verify OTP token
-  const { data, error } = await supabase.auth.verifyOtp({
-    email: pendingPhoneVerification,
-    token: enteredOTP,
-    type: 'email'
-  });
-  
-  if (error) {
-    console.error('OTP verification error:', error);
-    showAuthToast(`❌ ${error.message}`, 'error');
-    addAudit('OTP_VERIFICATION_FAILED', `OTP verification failed for ${pendingPhoneVerification}`);
-    return;
-  }
-  
-  if (data?.user) {
-    // Email verified successfully
-    isAuthenticated = true;
-    showAuthToast('✅ Email verified! Logging in...', 'success');
-    addAudit('USER_VERIFIED', `User email verified: ${pendingPhoneVerification}`);
-    setTimeout(() => loginSuccess(), 600);
-  }
-}
-
-// ===== PASSWORD RESET (SUPABASE) =====
-async function handleForgotPassword(e) {
-  e.preventDefault();
-  
-  const email = document.getElementById('forgot-email').value.trim();
-  
-  if (!email) {
-    showAuthToast('❌ Please enter your email', 'error');
-    return;
-  }
-  
-  if (!supabase) {
-    showAuthToast('❌ Database connection failed', 'error');
-    return;
-  }
-  
-  // SUPABASE: Send password reset email
-  const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}?action=reset_password`
-  });
-  
-  if (error) {
-    console.error('Password reset error:', error);
-    showAuthToast(`❌ ${error.message}`, 'error');
-    addAudit('PASSWORD_RESET_ERROR', `Password reset failed for ${email}`);
-    return;
-  }
-  
-  pendingPhoneVerification = email;
-  showAuthToast(`✅ Password reset email sent to ${email}`, 'success');
-  addAudit('PASSWORD_RESET_SENT', `Reset link sent to ${email}`);
-  
-  // Show OTP screen for verification
-  document.getElementById('otp-email').textContent = email;
-  switchAuthScreen('otp');
 }
 
 function renderOTPInputs() {
@@ -1232,29 +1008,129 @@ function getOTPValue() {
   return otp;
 }
 
-
-
-function resendOTP() {
-  if (!supabase) {
-    showAuthToast('❌ Database connection failed', 'error');
+function handleLogin(e) {
+  e.preventDefault();
+  const phone = document.getElementById('login-phone').value.trim();
+  const password = document.getElementById('login-password').value.trim();
+  
+  if (!phone || !password) {
+    showAuthToast('Please fill all fields', 'error');
     return;
   }
   
-  // SUPABASE: Resend OTP to email
-  supabase.auth.resend({
-    type: 'signup',
-    email: pendingPhoneVerification
-  }).then(({ data, error }) => {
-    if (error) {
-      showAuthToast(`❌ ${error.message}`, 'error');
-      return;
-    }
-    showAuthToast('📧 Verification code resent to your email', 'success');
-    addAudit('OTP_RESENT', `OTP resent to ${pendingPhoneVerification}`);
-  }).catch(err => {
-    showAuthToast('Failed to resend OTP', 'error');
-  });
+  // Check if user exists
+  if (!registeredUsers[phone]) {
+    showAuthToast('❌ Phone number not registered', 'error');
+    return;
+  }
   
+  if (registeredUsers[phone].password !== password) {
+    showAuthToast('❌ Incorrect password', 'error');
+    return;
+  }
+  
+  // Send OTP
+  pendingPhoneVerification = phone;
+  otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+  otpExpiry = Date.now() + 5 * 60 * 1000;
+  
+  document.getElementById('otp-phone').textContent = phone;
+  showAuthToast(`📱 OTP sent to ${phone}`, 'success');
+  switchAuthScreen('otp');
+}
+
+function handleSignup(e) {
+  e.preventDefault();
+  const name = document.getElementById('signup-name').value.trim();
+  const phone = document.getElementById('signup-phone').value.trim();
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value.trim();
+  const confirm = document.getElementById('signup-confirm').value.trim();
+  
+  if (!name || !phone || !password || !confirm) {
+    showAuthToast('Please fill required fields', 'error');
+    return;
+  }
+  
+  if (password !== confirm) {
+    showAuthToast('❌ Passwords do not match', 'error');
+    return;
+  }
+  
+  if (password.length < 6) {
+    showAuthToast('❌ Password must be at least 6 characters', 'error');
+    return;
+  }
+  
+  if (registeredUsers[phone]) {
+    showAuthToast('❌ Phone already registered', 'error');
+    return;
+  }
+  
+  // Register user
+  registeredUsers[phone] = { name, phone, email, password, verified: false };
+  
+  // Send OTP
+  pendingPhoneVerification = phone;
+  otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+  otpExpiry = Date.now() + 5 * 60 * 1000;
+  
+  document.getElementById('otp-phone').textContent = phone;
+  showAuthToast(`📱 OTP sent to ${phone}`, 'success');
+  switchAuthScreen('otp');
+}
+
+function handleOTPSubmit(e) {
+  e.preventDefault();
+  const enteredOTP = getOTPValue();
+  
+  if (Date.now() > otpExpiry) {
+    showAuthToast('❌ OTP expired. Request a new one.', 'error');
+    return;
+  }
+  
+  if (enteredOTP !== otpCode) {
+    showAuthToast('❌ Incorrect OTP code', 'error');
+    return;
+  }
+  
+  // Mark as verified
+  if (registeredUsers[pendingPhoneVerification]) {
+    registeredUsers[pendingPhoneVerification].verified = true;
+  }
+  
+  // Authenticate user
+  isAuthenticated = true;
+  currentUser = registeredUsers[pendingPhoneVerification];
+  addAudit('USER_LOGIN', `User ${pendingPhoneVerification} logged in successfully`);
+  
+  showAuthToast('✅ Phone verified! Logging in...', 'success');
+  setTimeout(() => loginSuccess(), 600);
+}
+
+function handleForgotPassword(e) {
+  e.preventDefault();
+  const phone = document.getElementById('forgot-phone').value.trim();
+  
+  if (!registeredUsers[phone]) {
+    showAuthToast('❌ Phone number not registered', 'error');
+    return;
+  }
+  
+  // Send reset OTP
+  pendingPhoneVerification = phone;
+  otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+  otpExpiry = Date.now() + 5 * 60 * 1000;
+  
+  document.getElementById('otp-phone').textContent = phone;
+  showAuthToast(`📱 Reset code sent to ${phone}`, 'success');
+  switchAuthScreen('otp');
+}
+
+function resendOTP() {
+  otpCode = Math.floor(100000 + Math.random() * 900000).toString();
+  otpExpiry = Date.now() + 5 * 60 * 1000;
+  showAuthToast('📱 OTP resent to your phone', 'success');
   document.getElementById('otp-inputs').innerHTML = '';
   renderOTPInputs();
   startOTPTimer();
@@ -2364,5 +2240,5 @@ window.elementSdk.init({
     </div>
    </main>
   </div>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ec4a599f00c8a5e',t:'MTc3NjE5MDAxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ebec792d66c9dd1',t:'MTc3NjEyODQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
