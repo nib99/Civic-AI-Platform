@@ -101,10 +101,10 @@
         <label class="block text-xs font-semibold text-slate-600 mb-2">Full Name</label> <input id="signup-name" type="text" required placeholder="Your full name" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
        <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="signup-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Email Address</label> <input id="signup-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
        <div class="mb-4">
-        <label class="block text-xs font-semibold text-slate-600 mb-2">Email (Optional)</label> <input id="signup-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number (Optional)</label> <input id="signup-phone" type="tel" placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
        <div class="mb-4">
         <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="signup-password" type="password" required placeholder="Create a strong password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
@@ -122,13 +122,13 @@
    <div id="otp-screen" class="w-full h-full hidden flex items-center justify-center p-4" style="background:linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%);">
     <div class="w-full max-w-400px">
      <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter">
-      <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Verify Phone</h2>
-      <p class="text-xs text-center text-slate-400 mb-6">Enter the 6-digit code sent to your phone</p>
-      <div id="otp-phone-display" class="bg-slate-50 rounded-lg px-4 py-3 text-center mb-6">
+      <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Verify Email</h2>
+      <p class="text-xs text-center text-slate-400 mb-6">Enter the 6-digit code sent to your email</p>
+      <div id="otp-email-display" class="bg-slate-50 rounded-lg px-4 py-3 text-center mb-6">
        <div class="text-xs text-slate-500 mb-1">
         Code sent to
        </div>
-       <div id="otp-phone" class="font-mono-accent font-semibold text-slate-700"></div>
+       <div id="otp-email" class="font-mono-accent font-semibold text-slate-700"></div>
       </div>
       <form id="otp-form" onsubmit="handleOTPSubmit(event)">
        <label class="block text-xs font-semibold text-slate-600 mb-3">Enter Code</label>
@@ -1045,45 +1045,50 @@ function getOTPValue() {
 
 function handleLogin(e) {
   e.preventDefault();
-  const phone = document.getElementById('login-phone').value.trim();
+  const email = document.getElementById('login-phone').value.trim();
   const password = document.getElementById('login-password').value.trim();
   
-  if (!phone || !password) {
+  if (!email || !password) {
     showAuthToast('Please fill all fields', 'error');
     return;
   }
   
   // Check if user exists
-  if (!registeredUsers[phone]) {
-    showAuthToast('❌ Phone number not registered', 'error');
+  if (!registeredUsers[email]) {
+    showAuthToast('❌ Email not registered', 'error');
     return;
   }
   
-  if (registeredUsers[phone].password !== password) {
+  if (registeredUsers[email].password !== password) {
     showAuthToast('❌ Incorrect password', 'error');
     return;
   }
   
   // Send OTP
-  pendingPhoneVerification = phone;
+  pendingPhoneVerification = email;
   otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   otpExpiry = Date.now() + 5 * 60 * 1000;
   
-  document.getElementById('otp-phone').textContent = phone;
-  showAuthToast(`📱 OTP sent to ${phone}`, 'success');
+  document.getElementById('otp-email').textContent = email;
+  showAuthToast(`📧 Verification code sent to ${email}`, 'success');
   switchAuthScreen('otp');
 }
 
 function handleSignup(e) {
   e.preventDefault();
   const name = document.getElementById('signup-name').value.trim();
-  const phone = document.getElementById('signup-phone').value.trim();
   const email = document.getElementById('signup-email').value.trim();
+  const phone = document.getElementById('signup-phone').value.trim();
   const password = document.getElementById('signup-password').value.trim();
   const confirm = document.getElementById('signup-confirm').value.trim();
   
-  if (!name || !phone || !password || !confirm) {
-    showAuthToast('Please fill required fields', 'error');
+  if (!name || !email || !password || !confirm) {
+    showAuthToast('Please fill all required fields (Name, Email, Password)', 'error');
+    return;
+  }
+  
+  if (!email.includes('@')) {
+    showAuthToast('❌ Please enter a valid email address', 'error');
     return;
   }
   
@@ -1097,21 +1102,21 @@ function handleSignup(e) {
     return;
   }
   
-  if (registeredUsers[phone]) {
-    showAuthToast('❌ Phone already registered', 'error');
+  if (registeredUsers[email]) {
+    showAuthToast('❌ Email already registered', 'error');
     return;
   }
   
-  // Register user
-  registeredUsers[phone] = { name, phone, email, password, verified: false };
+  // Register user (phone is optional)
+  registeredUsers[email] = { name, email, phone: phone || null, password, verified: false };
   
-  // Send OTP
-  pendingPhoneVerification = phone;
+  // Send OTP to email (required)
+  pendingPhoneVerification = email;
   otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   otpExpiry = Date.now() + 5 * 60 * 1000;
   
-  document.getElementById('otp-phone').textContent = phone;
-  showAuthToast(`📱 OTP sent to ${phone}`, 'success');
+  document.getElementById('otp-email').textContent = email;
+  showAuthToast(`📧 Verification code sent to ${email}`, 'success');
   switchAuthScreen('otp');
 }
 
@@ -1145,20 +1150,20 @@ function handleOTPSubmit(e) {
 
 function handleForgotPassword(e) {
   e.preventDefault();
-  const phone = document.getElementById('forgot-phone').value.trim();
+  const email = document.getElementById('forgot-phone').value.trim();
   
-  if (!registeredUsers[phone]) {
-    showAuthToast('❌ Phone number not registered', 'error');
+  if (!registeredUsers[email]) {
+    showAuthToast('❌ Email not registered', 'error');
     return;
   }
   
   // Send reset OTP
-  pendingPhoneVerification = phone;
+  pendingPhoneVerification = email;
   otpCode = Math.floor(100000 + Math.random() * 900000).toString();
   otpExpiry = Date.now() + 5 * 60 * 1000;
   
-  document.getElementById('otp-phone').textContent = phone;
-  showAuthToast(`📱 Reset code sent to ${phone}`, 'success');
+  document.getElementById('otp-email').textContent = email;
+  showAuthToast(`📧 Reset code sent to ${email}`, 'success');
   switchAuthScreen('otp');
 }
 
@@ -2275,5 +2280,5 @@ window.elementSdk.init({
     </div>
    </main>
   </div>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ec2723d73fd9dd1',t:'MTc3NjE2NjkzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ec2958f93ab9dd1',t:'MTc3NjE2ODM4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
