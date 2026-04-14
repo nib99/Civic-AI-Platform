@@ -8,6 +8,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.38.4"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <script src="/_sdk/data_sdk.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
@@ -47,13 +48,17 @@
 </style>
   <style>body { box-sizing: border-box; }</style>
  </head>
- <body class="h-full"><!-- AUTH SCREEN -->
-  <div id="auth-container" class="h-full flex"><!-- LOGIN SCREEN -->
+ <body class="h-full">
+  <!-- AUTH SCREEN -->
+  <div id="auth-container" class="h-full flex">
+   <!-- LOGIN SCREEN -->
    <div id="login-screen" class="w-full h-full flex items-center justify-center p-4" style="background:linear-gradient(135deg, #0c1929 0%, #1a2f4a 100%);">
     <div class="w-full max-w-400px">
-     <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter"><!-- Logo -->
+     <div class="bg-white rounded-2xl shadow-2xl p-8 card-enter">
+      <!-- Logo -->
       <div class="flex items-center justify-center mb-8">
-       <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:#1e6b3a;"><span class="text-white text-2xl">🏛️</span>
+       <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background:#1e6b3a;">
+        <span class="text-white text-2xl">🏛️</span>
        </div>
        <div class="ml-3">
         <div class="text-lg font-bold" style="color:#0c1929;">
@@ -67,11 +72,14 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Welcome Back</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Sign in to your government account</p>
       <form id="login-form" onsubmit="handleLogin(event)">
-       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="login-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="login-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-2"><label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="login-password" type="password" required placeholder="Enter your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-2">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="login-password" type="password" required placeholder="Enter your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="text-right mb-6"><button type="button" onclick="switchAuthScreen('forgot')" class="text-xs text-blue-600 hover:text-blue-700 font-medium">Forgot password?</button>
+       <div class="text-right mb-6">
+        <button type="button" onclick="switchAuthScreen('forgot')" class="text-xs text-blue-600 hover:text-blue-700 font-medium">Forgot password?</button>
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"> Sign In </button>
       </form>
       <div class="text-center mt-6 text-xs text-slate-600">
@@ -89,15 +97,20 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Create Account</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Join the Civic AI Platform</p>
       <form id="signup-form" onsubmit="handleSignup(event)">
-       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Full Name</label> <input id="signup-name" type="text" required placeholder="Your full name" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Full Name</label> <input id="signup-name" type="text" required placeholder="Your full name" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="signup-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="signup-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Email (Optional)</label> <input id="signup-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Email (Optional)</label> <input id="signup-email" type="email" placeholder="your@email.com" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-4"><label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="signup-password" type="password" required placeholder="Create a strong password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-4">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label> <input id="signup-password" type="password" required placeholder="Create a strong password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div>
-       <div class="mb-6"><label class="block text-xs font-semibold text-slate-600 mb-2">Confirm Password</label> <input id="signup-confirm" type="password" required placeholder="Confirm your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-6">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Confirm Password</label> <input id="signup-confirm" type="password" required placeholder="Confirm your password" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'"> Create Account </button>
       </form>
       <div class="text-center mt-6 text-xs text-slate-600">
@@ -117,15 +130,18 @@
        </div>
        <div id="otp-phone" class="font-mono-accent font-semibold text-slate-700"></div>
       </div>
-      <form id="otp-form" onsubmit="handleOTPSubmit(event)"><label class="block text-xs font-semibold text-slate-600 mb-3">Enter Code</label>
+      <form id="otp-form" onsubmit="handleOTPSubmit(event)">
+       <label class="block text-xs font-semibold text-slate-600 mb-3">Enter Code</label>
        <div class="flex gap-2 mb-4" id="otp-inputs"></div>
        <div id="otp-timer" class="text-center text-xs text-slate-500 mb-4">
         Expires in <span id="timer-count">300</span>s
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;"> Verify </button>
       </form>
-      <div class="text-center mt-4"><button type="button" onclick="resendOTP()" class="text-xs text-blue-600 hover:text-blue-700 font-medium"> Didn't receive code? Resend </button>
+      <div class="text-center mt-4">
+       <button type="button" onclick="resendOTP()" class="text-xs text-blue-600 hover:text-blue-700 font-medium"> Didn't receive code? Resend </button>
       </div>
-      <div class="text-center mt-6 text-xs text-slate-600"><button type="button" onclick="switchAuthScreen('login')" class="text-slate-500 hover:text-slate-700">← Back to Login</button>
+      <div class="text-center mt-6 text-xs text-slate-600">
+       <button type="button" onclick="switchAuthScreen('login')" class="text-slate-500 hover:text-slate-700">← Back to Login</button>
       </div>
      </div>
     </div>
@@ -136,20 +152,24 @@
       <h2 class="text-xl font-bold text-center mb-1" style="color:#0c1929;">Reset Password</h2>
       <p class="text-xs text-center text-slate-400 mb-6">Enter your phone to receive a reset code</p>
       <form id="forgot-form" onsubmit="handleForgotPassword(event)">
-       <div class="mb-6"><label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="forgot-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
+       <div class="mb-6">
+        <label class="block text-xs font-semibold text-slate-600 mb-2">Phone Number</label> <input id="forgot-phone" type="tel" required placeholder="+251 9xx xxx xxxx" class="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-sm focus:outline-none focus:border-green-500 transition-colors">
        </div><button type="submit" class="w-full py-3 rounded-lg text-white font-semibold text-sm transition-all" style="background:#1e6b3a;"> Send Reset Code </button>
       </form>
-      <div class="text-center mt-6 text-xs text-slate-600"><button type="button" onclick="switchAuthScreen('login')" class="text-blue-600 hover:text-blue-700 font-semibold">← Back to Login</button>
+      <div class="text-center mt-6 text-xs text-slate-600">
+       <button type="button" onclick="switchAuthScreen('login')" class="text-blue-600 hover:text-blue-700 font-semibold">← Back to Login</button>
       </div>
      </div>
     </div>
    </div>
   </div>
-  <div id="app" class="h-full flex hidden" style="background:#f0f2f5;"><!-- Sidebar -->
+  <div id="app" class="h-full flex hidden" style="background:#f0f2f5;">
+   <!-- Sidebar -->
    <nav id="sidebar" class="w-64 flex-shrink-0 flex flex-col" style="background:#0c1929;">
     <div class="p-5 border-b border-white/10">
      <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#1e6b3a;"><span class="text-white text-lg">🏛️</span>
+      <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:#1e6b3a;">
+       <span class="text-white text-lg">🏛️</span>
       </div>
       <div>
        <div id="sidebar-title" class="text-white font-bold text-sm leading-tight">
@@ -161,7 +181,8 @@
       </div>
      </div>
     </div>
-    <div class="flex-1 p-3 flex flex-col gap-1"><button onclick="switchView('dashboard')" id="nav-dashboard" class="sidebar-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/90 text-sm text-left"> <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Dashboard </button> <button onclick="switchView('map')" id="nav-map" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="map-pin" style="width:18px;height:18px;"></i> Map View </button> <button onclick="switchView('complaints')" id="nav-complaints" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="inbox" style="width:18px;height:18px;"></i> Complaints </button> <button onclick="switchView('submit')" id="nav-submit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="plus-circle" style="width:18px;height:18px;"></i> New Complaint </button> <button onclick="switchView('legal')" id="nav-legal" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="scale" style="width:18px;height:18px;"></i> Legal Database </button> <button onclick="switchView('audit')" id="nav-audit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="shield-check" style="width:18px;height:18px;"></i> Audit Log </button> <button onclick="switchView('telegram')" id="nav-telegram" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="send" style="width:18px;height:18px;"></i> Telegram Bot </button> <button onclick="switchView('roles')" id="nav-roles" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="users" style="width:18px;height:18px;"></i> Roles </button>
+    <div class="flex-1 p-3 flex flex-col gap-1">
+     <button onclick="switchView('dashboard')" id="nav-dashboard" class="sidebar-btn active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/90 text-sm text-left"> <i data-lucide="layout-dashboard" style="width:18px;height:18px;"></i> Dashboard </button> <button onclick="switchView('map')" id="nav-map" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="map-pin" style="width:18px;height:18px;"></i> Map View </button> <button onclick="switchView('complaints')" id="nav-complaints" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="inbox" style="width:18px;height:18px;"></i> Complaints </button> <button onclick="switchView('submit')" id="nav-submit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="plus-circle" style="width:18px;height:18px;"></i> New Complaint </button> <button onclick="switchView('legal')" id="nav-legal" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="scale" style="width:18px;height:18px;"></i> Legal Database </button> <button onclick="switchView('audit')" id="nav-audit" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="shield-check" style="width:18px;height:18px;"></i> Audit Log </button> <button onclick="switchView('telegram')" id="nav-telegram" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="send" style="width:18px;height:18px;"></i> Telegram Bot </button> <button onclick="switchView('roles')" id="nav-roles" class="sidebar-btn w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-white/60 text-sm text-left"> <i data-lucide="users" style="width:18px;height:18px;"></i> Roles </button>
     </div>
     <div class="p-4 border-t border-white/10">
      <div class="flex items-center gap-3">
@@ -179,17 +200,21 @@
      </div><button onclick="logout()" class="w-full mt-3 px-3 py-2 rounded-lg text-white text-xs font-semibold transition-all hover:bg-red-600/20" style="background:rgba(239,68,68,0.1);color:#ef4444;"> 🔒 Logout </button>
     </div>
    </nav><!-- Main Content -->
-   <main class="flex-1 flex flex-col h-full overflow-hidden"><!-- Header -->
+   <main class="flex-1 flex flex-col h-full overflow-hidden">
+    <!-- Header -->
     <header class="flex items-center justify-between px-6 py-4 bg-white border-b border-slate-200">
      <div>
       <h1 id="page-title" class="text-lg font-bold" style="color:#0c1929;">Dashboard Overview</h1>
       <p class="text-xs text-slate-400 font-mono-accent" id="current-time"></p>
      </div>
-     <div class="flex items-center gap-3"><span class="badge" style="background:#dcfce7;color:#166534;">System Operational</span> <span class="badge" style="background:#e0e7ff;color:#3730a3;">AI Active</span>
+     <div class="flex items-center gap-3">
+      <span class="badge" style="background:#dcfce7;color:#166534;">System Operational</span> <span class="badge" style="background:#e0e7ff;color:#3730a3;">AI Active</span>
      </div>
     </header>
-    <div class="flex-1 scroll-area p-6"><!-- DASHBOARD VIEW -->
-     <div id="view-dashboard"><!-- Stats Row -->
+    <div class="flex-1 scroll-area p-6">
+     <!-- DASHBOARD VIEW -->
+     <div id="view-dashboard">
+      <!-- Stats Row -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
        <div class="stat-card card-enter bg-white rounded-xl p-5 border border-slate-100">
         <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-1">
@@ -252,7 +277,8 @@
      <div id="view-map" class="hidden">
       <div class="bg-white rounded-xl border border-slate-100 p-4 card-enter mb-4">
        <h3 class="font-bold text-sm mb-3" style="color:#0c1929;">Real-Time Complaint Heatmap (Addis Ababa)</h3>
-       <div class="flex gap-2 mb-3"><button onclick="switchMapMode('markers')" id="map-mode-markers" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold bg-blue-50 text-blue-700">📍 Markers</button> <button onclick="switchMapMode('heatmap')" id="map-mode-heatmap" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">🔥 Heatmap</button> <button onclick="switchMapMode('clusters')" id="map-mode-clusters" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">📊 Clusters</button>
+       <div class="flex gap-2 mb-3">
+        <button onclick="switchMapMode('markers')" id="map-mode-markers" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold bg-blue-50 text-blue-700">📍 Markers</button> <button onclick="switchMapMode('heatmap')" id="map-mode-heatmap" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">🔥 Heatmap</button> <button onclick="switchMapMode('clusters')" id="map-mode-clusters" class="px-3 py-2 rounded-lg border border-slate-200 text-xs font-semibold hover:bg-slate-50">📊 Clusters</button>
        </div>
        <div id="map"></div>
       </div>
@@ -265,7 +291,8 @@
       </div>
      </div>
      <div id="view-complaints" class="hidden">
-      <div class="flex flex-wrap items-center gap-3 mb-4"><select id="filter-status" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Status</option> <option value="Submitted">Submitted</option> <option value="Under Review">Under Review</option> <option value="Resolved">Resolved</option> </select> <select id="filter-urgency" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Urgency</option> <option value="HIGH">High</option> <option value="MEDIUM">Medium</option> <option value="LOW">Low</option> </select> <select id="filter-category" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Categories</option> <option value="Waste Management">Waste Management</option> <option value="Water Services">Water Services</option> <option value="Roads &amp; Infrastructure">Roads &amp; Infrastructure</option> <option value="Public Health">Public Health</option> <option value="Land &amp; Housing">Land &amp; Housing</option> <option value="Governance">Governance</option> </select> <select id="filter-language" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Languages</option> <option value="en">English</option> <option value="am">Amharic</option> <option value="om">Oromo</option> </select> <button onclick="toggleDuplicateFilter()" id="dup-btn" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white hover:bg-slate-50">🚫 Show Duplicates</button>
+      <div class="flex flex-wrap items-center gap-3 mb-4">
+       <select id="filter-status" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Status</option> <option value="Submitted">Submitted</option> <option value="Under Review">Under Review</option> <option value="Resolved">Resolved</option> </select> <select id="filter-urgency" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Urgency</option> <option value="HIGH">High</option> <option value="MEDIUM">Medium</option> <option value="LOW">Low</option> </select> <select id="filter-category" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Categories</option> <option value="Waste Management">Waste Management</option> <option value="Water Services">Water Services</option> <option value="Roads &amp; Infrastructure">Roads &amp; Infrastructure</option> <option value="Public Health">Public Health</option> <option value="Land &amp; Housing">Land &amp; Housing</option> <option value="Governance">Governance</option> </select> <select id="filter-language" onchange="renderComplaints()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white"> <option value="all">All Languages</option> <option value="en">English</option> <option value="am">Amharic</option> <option value="om">Oromo</option> </select> <button onclick="toggleDuplicateFilter()" id="dup-btn" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-white hover:bg-slate-50">🚫 Show Duplicates</button>
       </div>
       <div id="complaints-list"></div>
       <div id="complaints-empty" class="text-center text-slate-400 text-sm py-12">
@@ -279,23 +306,31 @@
         <p class="text-xs text-slate-400 mb-5">AI will automatically classify and match relevant laws.</p>
         <form id="complaint-form" onsubmit="handleSubmit(event)">
          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div><label for="f-name" class="block text-xs font-semibold text-slate-500 mb-1">Citizen Name</label> <input id="f-name" type="text" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Full name">
+          <div>
+           <label for="f-name" class="block text-xs font-semibold text-slate-500 mb-1">Citizen Name</label> <input id="f-name" type="text" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Full name">
           </div>
-          <div><label for="f-phone" class="block text-xs font-semibold text-slate-500 mb-1">Phone (SMS Fallback)</label> <input id="f-phone" type="tel" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+251 9xx xxx xxxx">
-          </div>
-         </div>
-         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div><label for="f-region" class="block text-xs font-semibold text-slate-500 mb-1">Region / Woreda</label> <select id="f-region" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select region</option> <option>Addis Ababa / Bole</option> <option>Addis Ababa / Yeka</option> <option>Oromia / Sheger</option> <option>Oromia / Adama</option> <option>Amhara / Bahir Dar</option> <option>SNNPR / Hawassa</option> <option>Tigray / Mekelle</option> <option>Other</option> </select>
-          </div>
-          <div><label for="f-category" class="block text-xs font-semibold text-slate-500 mb-1">Category</label> <select id="f-category" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select category</option> <option>Waste Management</option> <option>Water Services</option> <option>Roads &amp; Infrastructure</option> <option>Public Health</option> <option>Land &amp; Housing</option> <option>Governance</option> </select>
+          <div>
+           <label for="f-phone" class="block text-xs font-semibold text-slate-500 mb-1">Phone (SMS Fallback)</label> <input id="f-phone" type="tel" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="+251 9xx xxx xxxx">
           </div>
          </div>
          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-          <div><label for="f-email" class="block text-xs font-semibold text-slate-500 mb-1">Email (for updates)</label> <input id="f-email" type="email" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@email.com">
+          <div>
+           <label for="f-region" class="block text-xs font-semibold text-slate-500 mb-1">Region / Woreda</label> <select id="f-region" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select region</option> <option>Addis Ababa / Bole</option> <option>Addis Ababa / Yeka</option> <option>Oromia / Sheger</option> <option>Oromia / Adama</option> <option>Amhara / Bahir Dar</option> <option>SNNPR / Hawassa</option> <option>Tigray / Mekelle</option> <option>Other</option> </select>
           </div>
-          <div><label class="block text-xs font-semibold text-slate-500 mb-1">GPS Location (Optional)</label> <button type="button" onclick="captureGPS()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-blue-50 text-blue-700 font-medium hover:bg-blue-100 transition-all w-full"> <i data-lucide="navigation-2" style="width:14px;height:14px;display:inline;margin-right:4px;"></i> Get Current Location </button>
-           <div class="mb-4"><label for="f-desc" class="block text-xs font-semibold text-slate-500 mb-2">Description</label>
-            <div class="flex gap-2 mb-4"><textarea id="f-desc" required rows="4" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Describe the issue in detail..."></textarea> <button type="button" id="voice-btn" onclick="startVoiceInput()" class="px-3 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all" title="Record complaint with voice"> <i data-lucide="mic" style="width:20px;height:20px;"></i> </button>
+          <div>
+           <label for="f-category" class="block text-xs font-semibold text-slate-500 mb-1">Category</label> <select id="f-category" required class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"> <option value="">Select category</option> <option>Waste Management</option> <option>Water Services</option> <option>Roads &amp; Infrastructure</option> <option>Public Health</option> <option>Land &amp; Housing</option> <option>Governance</option> </select>
+          </div>
+         </div>
+         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div>
+           <label for="f-email" class="block text-xs font-semibold text-slate-500 mb-1">Email (for updates)</label> <input id="f-email" type="email" class="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your@email.com">
+          </div>
+          <div>
+           <label class="block text-xs font-semibold text-slate-500 mb-1">GPS Location (Optional)</label> <button type="button" onclick="captureGPS()" class="px-3 py-2 rounded-lg border border-slate-200 text-sm bg-blue-50 text-blue-700 font-medium hover:bg-blue-100 transition-all w-full"> <i data-lucide="navigation-2" style="width:14px;height:14px;display:inline;margin-right:4px;"></i> Get Current Location </button>
+           <div class="mb-4">
+            <label for="f-desc" class="block text-xs font-semibold text-slate-500 mb-2">Description</label>
+            <div class="flex gap-2 mb-4">
+             <textarea id="f-desc" required rows="4" class="flex-1 px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" placeholder="Describe the issue in detail..."></textarea> <button type="button" id="voice-btn" onclick="startVoiceInput()" class="px-3 py-2 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition-all" title="Record complaint with voice"> <i data-lucide="mic" style="width:20px;height:20px;"></i> </button>
             </div>
            </div><button id="submit-btn" type="submit" class="px-6 py-2.5 rounded-lg text-white text-sm font-semibold transition-all hover:opacity-90" style="background:#1e6b3a;"> <span id="submit-text">Submit &amp; Analyze</span> <span id="submit-loading" class="hidden">Analyzing...</span> </button>
           </div>
@@ -308,7 +343,8 @@
        </div><!-- AUDIT VIEW -->
        <div id="view-audit" class="hidden">
         <div class="bg-white rounded-xl border border-slate-100 overflow-hidden">
-         <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2"><i data-lucide="shield-check" style="width:16px;height:16px;color:#6366f1;"></i> <span class="text-sm font-bold" style="color:#0c1929;">Immutable Audit Trail</span> <span class="badge ml-auto" style="background:#fef3c7;color:#92400e;">Tamper-Proof</span>
+         <div class="px-5 py-3 border-b border-slate-100 flex items-center gap-2">
+          <i data-lucide="shield-check" style="width:16px;height:16px;color:#6366f1;"></i> <span class="text-sm font-bold" style="color:#0c1929;">Immutable Audit Trail</span> <span class="badge ml-auto" style="background:#fef3c7;color:#92400e;">Tamper-Proof</span>
          </div>
          <div id="audit-list" class="divide-y divide-slate-50"></div>
          <div id="audit-empty" class="text-center text-slate-400 text-sm py-12">
@@ -330,6 +366,218 @@
       </div>
      </div>
      <script>
+// ===== SUPABASE INTEGRATION =====
+const SUPABASE_URL = 'https://xilystkfdruuxkxqjenq.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_25cTmqyhwmPx9Ak_IeNWJg_ZMQtFBox';
+
+let supabase = null;
+
+async function initSupabase() {
+  if (!window.supabase) {
+    console.error('Supabase library not loaded');
+    return false;
+  }
+  
+  const { createClient } = window.supabase;
+  supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  
+  console.log('✅ Supabase connected');
+  addAudit('SUPABASE_INIT', `Supabase database connected at ${SUPABASE_URL}`);
+  return true;
+}
+
+async function syncComplaints() {
+  if (!supabase) return false;
+  
+  try {
+    const { data, error } = await supabase
+      .from('complaints')
+      .select('*')
+      .order('created_at', { ascending: false });
+    
+    if (error) {
+      console.error('Supabase fetch error:', error);
+      addAudit('SUPABASE_ERROR', `Failed to fetch complaints: ${error.message}`);
+      return false;
+    }
+    
+    if (data && data.length > 0) {
+      allComplaints = data.map(record => ({
+        ...record,
+        __backendId: record.id || record.__backendId
+      }));
+      
+      console.log(`✅ Synced ${data.length} complaints from Supabase`);
+      addAudit('SUPABASE_SYNC', `Fetched ${data.length} complaints from database`);
+      
+      if (currentView === 'dashboard') renderDashboard();
+      if (currentView === 'complaints') renderComplaints();
+      
+      return true;
+    }
+  } catch (err) {
+    console.error('Supabase sync error:', err);
+    addAudit('SUPABASE_ERROR', `Sync error: ${err.message}`);
+    showToast('⚠️ Failed to sync with database. Using local cache.', 'error');
+    return false;
+  }
+}
+
+async function createComplaintSupabase(complaint) {
+  if (!supabase) return { isOk: false, isError: true, error: new Error('Supabase not initialized') };
+  
+  try {
+    const { data, error } = await supabase
+      .from('complaints')
+      .insert([{
+        citizen_name: complaint.citizen_name,
+        region: complaint.region,
+        category: complaint.category,
+        description: complaint.description,
+        language: complaint.language,
+        urgency: complaint.urgency,
+        status: complaint.status,
+        matched_law: complaint.matched_law,
+        ai_confidence: complaint.ai_confidence,
+        ai_recommendation: complaint.ai_recommendation,
+        department: complaint.department,
+        contact_phone: complaint.contact_phone,
+        contact_email: complaint.contact_email,
+        latitude: complaint.latitude,
+        longitude: complaint.longitude,
+        audit_hash: complaint.audit_hash,
+        assigned_role: complaint.assigned_role,
+        created_at: complaint.created_at
+      }])
+      .select();
+    
+    if (error) {
+      console.error('Supabase insert error:', error);
+      addAudit('SUPABASE_ERROR', `Failed to create complaint: ${error.message}`);
+      return { isOk: false, isError: true, error };
+    }
+    
+    console.log('✅ Complaint created in Supabase:', data);
+    addAudit('SUPABASE_CREATE', `Complaint ${complaint.audit_hash.substring(0, 8)} saved to Supabase`);
+    
+    return { isOk: true, isError: false, data };
+  } catch (err) {
+    console.error('Supabase create error:', err);
+    return { isOk: false, isError: true, error: err };
+  }
+}
+
+async function updateComplaintSupabase(complaint) {
+  if (!supabase) return { isOk: false, isError: true, error: new Error('Supabase not initialized') };
+  
+  try {
+    const complaintId = complaint.id || complaint.__backendId;
+    
+    const { data, error } = await supabase
+      .from('complaints')
+      .update({
+        status: complaint.status,
+        urgency: complaint.urgency,
+        assigned_role: complaint.assigned_role,
+        updated_at: new Date().toISOString()
+      })
+      .eq('id', complaintId)
+      .select();
+    
+    if (error) {
+      console.error('Supabase update error:', error);
+      return { isOk: false, isError: true, error };
+    }
+    
+    console.log('✅ Complaint updated in Supabase');
+    addAudit('SUPABASE_UPDATE', `Complaint ${complaintId} updated in database`);
+    
+    return { isOk: true, isError: false, data };
+  } catch (err) {
+    console.error('Supabase update error:', err);
+    return { isOk: false, isError: true, error: err };
+  }
+}
+
+async function deleteComplaintSupabase(complaint) {
+  if (!supabase) return { isOk: false, isError: true, error: new Error('Supabase not initialized') };
+  
+  try {
+    const complaintId = complaint.id || complaint.__backendId;
+    
+    const { error } = await supabase
+      .from('complaints')
+      .delete()
+      .eq('id', complaintId);
+    
+    if (error) {
+      console.error('Supabase delete error:', error);
+      return { isOk: false, isError: true, error };
+    }
+    
+    console.log('✅ Complaint deleted from Supabase');
+    addAudit('SUPABASE_DELETE', `Complaint ${complaintId} deleted from database`);
+    
+    return { isOk: true, isError: false };
+  } catch (err) {
+    console.error('Supabase delete error:', err);
+    return { isOk: false, isError: true, error: err };
+  }
+}
+
+async function syncAuditLog() {
+  if (!supabase) return false;
+  
+  try {
+    const { data, error } = await supabase
+      .from('audit_logs')
+      .select('*')
+      .order('timestamp', { ascending: false })
+      .limit(100);
+    
+    if (error) {
+      console.error('Supabase audit fetch error:', error);
+      return false;
+    }
+    
+    if (data && data.length > 0) {
+      auditLog = data;
+      console.log(`✅ Synced ${data.length} audit records from Supabase`);
+    }
+    
+    return true;
+  } catch (err) {
+    console.error('Supabase audit sync error:', err);
+    return false;
+  }
+}
+
+async function createAuditLogSupabase(auditRecord) {
+  if (!supabase) return false;
+  
+  try {
+    const { data, error } = await supabase
+      .from('audit_logs')
+      .insert([{
+        action: auditRecord.action,
+        detail: auditRecord.detail,
+        timestamp: auditRecord.timestamp,
+        user_role: auditRecord.user,
+        hash: auditRecord.hash
+      }]);
+    
+    if (error) {
+      console.error('Supabase audit insert error:', error);
+      return false;
+    }
+    
+    return true;
+  } catch (err) {
+    console.error('Supabase audit create error:', err);
+    return false;
+  }
+}
+
 // ===== MULTI-LANGUAGE SUPPORT =====
 const TRANSLATIONS = {
   en: {
@@ -1055,6 +1303,11 @@ function generateAuditHash(record) {
 function addAudit(action, detail) {
   const auditRecord = { action, detail, timestamp: new Date().toISOString(), user: currentUserRole, hash: generateAuditHash({ action, detail, user: currentUserRole }) };
   auditLog.unshift(auditRecord);
+  
+  // Also sync to Supabase if connected
+  if (supabase) {
+    createAuditLogSupabase(auditRecord).catch(err => console.error('Failed to sync audit to Supabase:', err));
+  }
 }
 
 // ===== TOAST =====
@@ -1252,8 +1505,9 @@ async function handleSubmit(e) {
   const phone = document.getElementById('f-phone').value.trim();
   const region = document.getElementById('f-region').value;
   const category = document.getElementById('f-category').value;
-  const lang = document.getElementById('f-lang').value;
+  const lang = document.getElementById('f-lang')?.value || 'en';
   const desc = document.getElementById('f-desc').value.trim();
+  const email = document.getElementById('f-email').value.trim();
 
   // Simulate AI processing delay
   await new Promise(r => setTimeout(r, 800));
@@ -1276,7 +1530,7 @@ async function handleSubmit(e) {
     ai_recommendation: ai.recommendation,
     department: ai.department,
     contact_phone: phone,
-    contact_email: '',
+    contact_email: email,
     latitude: gpsCoords.latitude,
     longitude: gpsCoords.longitude,
     audit_hash: audit_hash,
@@ -1284,10 +1538,37 @@ async function handleSubmit(e) {
     created_at: new Date().toISOString()
   };
 
-  const result = await window.dataSdk.create(record);
+  // Try to save to Supabase first, fallback to local
+  let saveSuccess = false;
+  
+  if (supabase) {
+    const result = await createComplaintSupabase(record);
+    if (result.isOk) {
+      saveSuccess = true;
+      // Update local record with backend ID
+      if (result.data && result.data.length > 0) {
+        record.__backendId = result.data[0].id;
+      }
+    } else {
+      console.warn('Supabase save failed, using local storage');
+      addAudit('SUPABASE_FALLBACK', `Could not save to Supabase: ${result.error?.message || 'Unknown error'}`);
+    }
+  }
+  
+  // If Supabase save failed or not connected, use local data SDK
+  if (!saveSuccess) {
+    const result = await window.dataSdk.create(record);
+    if (!result.isOk) {
+      btn.disabled = false; btnText.classList.remove('hidden'); btnLoad.classList.add('hidden');
+      showToast('Failed to submit complaint', 'error');
+      return;
+    }
+    saveSuccess = true;
+  }
+
   btn.disabled = false; btnText.classList.remove('hidden'); btnLoad.classList.add('hidden');
 
-  if (result.isOk) {
+  if (saveSuccess) {
     addAudit('CASE_CREATED', `New ${category} case from ${region} — ${ai.urgency} urgency | Phone: ${phone || 'N/A'} | Email: ${email || 'N/A'}`);
     
     // Send SMS via Ethio Telecom
@@ -1297,7 +1578,6 @@ async function handleSubmit(e) {
     }
     
     // Send Email notification
-    const email = document.getElementById('f-email').value.trim();
     if (email) {
       const emailSubject = `Complaint Received - Case #${audit_hash.substring(0, 8)}`;
       const emailContent = `Dear ${name},\n\nYour complaint regarding ${category} in ${region} has been received and assigned to ${ai.department}.\n\nUrgency Level: ${ai.urgency}\nMatched Law: ${ai.matched_law}\n\nWe will follow up within the next 24-72 hours.`;
@@ -1313,7 +1593,7 @@ async function handleSubmit(e) {
     document.getElementById('complaint-form').reset();
     gpsCoords = { latitude: null, longitude: null };
     switchView('complaints');
-  } else { showToast('Failed to submit complaint', 'error'); }
+  }
 }
 
 // ===== SMS PROVIDER INTEGRATION (Ethio Telecom) =====
@@ -1954,6 +2234,17 @@ window.elementSdk.init({
 
 // ===== DATA SDK =====
 (async () => {
+  // Initialize Supabase connection
+  const supabaseReady = await initSupabase();
+  if (supabaseReady) {
+    showAuthToast('🔗 Supabase connected', 'success');
+    // Sync existing data from Supabase
+    await syncComplaints();
+    await syncAuditLog();
+  } else {
+    showAuthToast('⚠️ Using local data storage (Supabase not available)', 'error');
+  }
+  
   // Initialize offline database
   await initOfflineDB();
   
@@ -1984,5 +2275,5 @@ window.elementSdk.init({
     </div>
    </main>
   </div>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9eab581e517f1bcc',t:'MTc3NTkyNDY5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ec2723d73fd9dd1',t:'MTc3NjE2NjkzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
